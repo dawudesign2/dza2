@@ -35,7 +35,7 @@ public class Security {
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(
-                                HttpMethod.POST,
+                               "/*",
                                 "/auth/**"
                         ).permitAll()
                         .requestMatchers(
@@ -49,7 +49,7 @@ public class Security {
                                 "/swagger-ui/**",
                                 "/swagger-ui.html"
                         ).permitAll()
-                        .anyRequest().permitAll()
+                        .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider());
         return http.build();

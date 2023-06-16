@@ -1,9 +1,9 @@
 package fr.dawudesign.dza.users.controllers;
 
-import fr.dawudesign.dza.users.dtos.ProfileDTO;
 import fr.dawudesign.dza.users.dtos.UserDTO;
 import fr.dawudesign.dza.users.services.UserService;
 import fr.dawudesign.dza.utils.AbstractController;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/users")
+@Tag(name = "User")
 public class UserController implements AbstractController<UserDTO> {
     private final UserService service;
     @Override

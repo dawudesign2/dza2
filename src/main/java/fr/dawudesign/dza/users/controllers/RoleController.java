@@ -3,6 +3,7 @@ package fr.dawudesign.dza.users.controllers;
 import fr.dawudesign.dza.users.entities.Role;
 import fr.dawudesign.dza.users.services.RoleService;
 import fr.dawudesign.dza.utils.AbstractController;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/roles")
+@Tag(name = "Role")
 public class RoleController implements AbstractController<Role> {
 
     private final RoleService service;

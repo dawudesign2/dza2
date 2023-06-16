@@ -25,7 +25,7 @@ public class User extends AbstractEntity implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    @Column(columnDefinition = "boolean default true")
+    @Column(columnDefinition = "boolean default false")
     private Boolean enabled;
 
     @OneToOne
@@ -66,7 +66,5 @@ public class User extends AbstractEntity implements UserDetails {
     }
 
     @Override
-    public boolean isEnabled() {
-        return enabled;
-    }
+    public boolean isEnabled() {return enabled;}
 }

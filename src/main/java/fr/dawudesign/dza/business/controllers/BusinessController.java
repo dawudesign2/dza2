@@ -3,6 +3,7 @@ package fr.dawudesign.dza.business.controllers;
 import fr.dawudesign.dza.business.dtos.BusinessDTO;
 import fr.dawudesign.dza.business.services.BusinessService;
 import fr.dawudesign.dza.utils.AbstractController;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/business")
+@Tag(name = "Business")
 public class BusinessController implements AbstractController<BusinessDTO> {
 
     private final BusinessService service;
