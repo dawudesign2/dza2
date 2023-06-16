@@ -1,9 +1,8 @@
 package fr.dawudesign.dza.users.entities;
 
+import fr.dawudesign.dza.business.entities.Business;
 import fr.dawudesign.dza.utils.AbstractEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.security.core.GrantedAuthority;
@@ -26,6 +25,7 @@ public class User extends AbstractEntity implements UserDetails {
     @Column(nullable = false)
     private String password;
 
+    @Column(columnDefinition = "boolean default true")
     private Boolean enabled;
 
     @OneToOne
@@ -33,6 +33,10 @@ public class User extends AbstractEntity implements UserDetails {
 
     @OneToOne
     private Profile profile;
+
+    @ManyToOne
+    @JoinColumn(name = "business_id")
+    private Business business;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -63,6 +67,6 @@ public class User extends AbstractEntity implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 }

@@ -37,6 +37,7 @@ public class AuthServiceImpl implements AuthService {
         userRegister.setPassword(passwordEncoder.encode(user.getPassword()));
         String ROLE_NAME = "Customer";
         userRegister.setRole(findCreateOrRole(ROLE_NAME));
+        userRegister.setEnabled(true);
         var userSaved = userRepository.save(userRegister);
         claims.put("id", userSaved.getId());
         claims.put("username", userSaved.getUsername());

@@ -1,0 +1,55 @@
+---
+title: DZA - Modèle Conceptuel de Données
+author: Dawudesign
+---
+erDiagram
+    User ||--|| Profile : has
+    User ||--|| Role : has
+    User {
+        int id
+        string userName
+        string password
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    Profile
+    Profile {
+        int id
+        string firstName
+        string lastName
+        string email
+        string phone
+        string address
+        string city
+        string country
+        string zipCode
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    Role
+    Role {
+        int id
+        string name
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    Business }|--|{ User : has
+    Business {
+        int id
+        string name
+        string description
+        string address
+        string city
+        string country
+        string zipCode
+        string phone
+        string email
+        string website
+        string logo
+        string siret
+        timestamp created_at
+        timestamp updated_at
+    }

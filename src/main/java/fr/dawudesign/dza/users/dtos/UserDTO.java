@@ -15,6 +15,7 @@ public class UserDTO {
     private Boolean enabled;
     private Long roleId;
     private Long profileId;
+    private Long businessId;
 
     public static UserDTO fromEntity(User user) {
         return UserDTO.builder()
@@ -24,6 +25,7 @@ public class UserDTO {
                 .enabled(user.isEnabled())
                 .roleId(user.getRole().getId())
                 .profileId(user.getProfile() != null ? user.getProfile().getId() : null)
+                .businessId(user.getBusiness() != null ? user.getBusiness().getId() : null)
                 .build();
     }
 
