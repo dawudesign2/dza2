@@ -32,8 +32,6 @@ public class OpenApi {
             .info(new Info()
                 .title("DZa API")
                 .version("1.0.0")
-                .description("DZa API")
-                .termsOfService("http://swagger.io/terms/")
-                .license(new License().name("Apache 2.0").url("http://springdoc.org")));
+                .description("DZa API"));
     }
 }
