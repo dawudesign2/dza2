@@ -24,4 +24,25 @@ public class WebErrorMapper {
                 e.getMessage()
         );
     }
+
+    public WebError map(OperationNonPermittedException e) {
+        return new WebError(
+                HttpStatus.FORBIDDEN.value(),
+                HttpStatus.FORBIDDEN,
+                new Date(),
+                "OPERATION_NON_PERMITTED",
+                e.getMessage()
+        );
+    }
+
+    public WebError map(ObjectValidationException e) {
+        return new WebError(
+                HttpStatus.BAD_REQUEST.value(),
+                HttpStatus.BAD_REQUEST,
+                new Date(),
+                "OBJECT_VALIDATION_ERROR",
+                e.getMessage(),
+                e.getViolations()
+        );
+    }
 }

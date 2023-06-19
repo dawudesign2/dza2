@@ -18,7 +18,6 @@ public class BusinessServiceImpl implements BusinessService {
     private final ObjectValidator<BusinessDTO> validator;
     @Override
     public Iterable<BusinessDTO> findAll() {
-
         return repository.findAll()
                 .stream()
                 .map(BusinessDTO::fromEntity)
@@ -39,6 +38,7 @@ public class BusinessServiceImpl implements BusinessService {
 
     @Override
     public BusinessDTO save(BusinessDTO businessDTO) {
+        validator.validate(businessDTO);
         Business business = BusinessDTO.toEntity(businessDTO);
         business.setActive(true);
         return BusinessDTO.fromEntity(repository.save(business));
