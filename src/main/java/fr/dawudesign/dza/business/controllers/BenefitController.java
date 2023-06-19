@@ -18,26 +18,27 @@ public class BenefitController implements AbstractController<BenefitDTO> {
     private final BenefitService service;
     @Override
     public ResponseEntity<Iterable<BenefitDTO>> getAll() {
-        return null;
+        return ResponseEntity.ok(service.findAll());
     }
 
     @Override
     public ResponseEntity<BenefitDTO> getById(Long id) {
-        return null;
+        return ResponseEntity.ok(service.findById(id));
     }
 
     @Override
     public ResponseEntity<BenefitDTO> save(BenefitDTO benefitDTO) {
-        return null;
+        return ResponseEntity.ok(service.save(benefitDTO));
     }
 
     @Override
     public ResponseEntity<BenefitDTO> updateById(Long id, BenefitDTO benefitDTO) {
-        return null;
+        return ResponseEntity.ok(service.update(id, benefitDTO));
     }
 
     @Override
     public ResponseEntity<Void> deleteById(Long id) {
-        return null;
+        service.deleteById(id);
+        return ResponseEntity.accepted().build();
     }
 }

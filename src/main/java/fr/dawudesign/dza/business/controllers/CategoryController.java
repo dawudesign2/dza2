@@ -17,26 +17,27 @@ public class CategoryController implements AbstractController<CategoryDTO> {
     private final CategoryService service;
     @Override
     public ResponseEntity<Iterable<CategoryDTO>> getAll() {
-        return null;
+        return ResponseEntity.ok(service.findAll());
     }
 
     @Override
     public ResponseEntity<CategoryDTO> getById(Long id) {
-        return null;
+        return ResponseEntity.ok(service.findById(id));
     }
 
     @Override
     public ResponseEntity<CategoryDTO> save(CategoryDTO categoryDTO) {
-        return null;
+        return ResponseEntity.ok(service.save(categoryDTO));
     }
 
     @Override
     public ResponseEntity<CategoryDTO> updateById(Long id, CategoryDTO categoryDTO) {
-        return null;
+        return ResponseEntity.ok(service.update(id, categoryDTO));
     }
 
     @Override
     public ResponseEntity<Void> deleteById(Long id) {
-        return null;
+        service.deleteById(id);
+        return ResponseEntity.accepted().build();
     }
 }
