@@ -1,6 +1,10 @@
 package fr.dawudesign.dza.users.dtos;
 
 import fr.dawudesign.dza.users.entities.User;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @Getter
@@ -10,7 +14,14 @@ import lombok.*;
 public class UserDTO {
 
     private Long id;
+    @NotNull
+    @NotEmpty
+    @NotBlank
     private String username;
+    @NotNull
+    @NotEmpty
+    @NotBlank
+    @Size(min = 8)
     private String password;
     private Boolean enabled;
     private Long roleId;

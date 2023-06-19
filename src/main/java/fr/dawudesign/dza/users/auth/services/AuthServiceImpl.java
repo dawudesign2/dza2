@@ -1,5 +1,6 @@
 package fr.dawudesign.dza.users.auth.services;
 
+import fr.dawudesign.dza.exeptions.ParametrizeMessageException;
 import fr.dawudesign.dza.users.auth.dtos.AuthenticationRequest;
 import fr.dawudesign.dza.users.auth.dtos.AuthenticationResponse;
 import fr.dawudesign.dza.users.auth.utils.JwtUtils;
@@ -10,6 +11,7 @@ import fr.dawudesign.dza.users.repositories.RoleRepository;
 import fr.dawudesign.dza.users.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -66,7 +68,12 @@ public class AuthServiceImpl implements AuthService {
                 new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
         );
         User user = userRepository.findByUsername(request.getUsername())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ParametrizeMessageException(
+                        HttpStatus.NOT_FOUND,
+                        "user.entity.not.found",
+                        "User with id %s not found",
+                        request.getUsername()
+                ));
         claims.put("id", user.getId());
         claims.put("username", user.getUsername());
         String Token = JwtUtils.generateToken(user, claims);

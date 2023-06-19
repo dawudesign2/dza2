@@ -1,5 +1,7 @@
 package fr.dawudesign.dza.users.dtos;
 import fr.dawudesign.dza.users.entities.Profile;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Pattern;
 import lombok.*;
 
 @Getter
@@ -10,7 +12,9 @@ public class ProfileDTO {
     private Long id;
     private String firstName;
     private String lastName;
+    @Email
     private String email;
+    @Pattern(regexp = "^(\\+33|0)[1-9](\\d{2}){4}$")
     private String phone;
     private String address;
     private String city;

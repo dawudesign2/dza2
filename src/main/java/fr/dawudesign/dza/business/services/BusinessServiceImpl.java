@@ -3,6 +3,7 @@ package fr.dawudesign.dza.business.services;
 import fr.dawudesign.dza.business.dtos.BusinessDTO;
 import fr.dawudesign.dza.business.entities.Business;
 import fr.dawudesign.dza.business.repositories.BusinessRepository;
+import fr.dawudesign.dza.exeptions.ObjectValidator;
 import fr.dawudesign.dza.exeptions.ParametrizeMessageException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class BusinessServiceImpl implements BusinessService {
     private final BusinessRepository repository;
+    private final ObjectValidator<BusinessDTO> validator;
     @Override
     public Iterable<BusinessDTO> findAll() {
 

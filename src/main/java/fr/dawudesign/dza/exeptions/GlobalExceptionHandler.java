@@ -28,6 +28,26 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(e, webErrorMapper.map(e) ,new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
 
+    @ExceptionHandler(ObjectValidationException.class)
+    public ResponseEntity<ExceptionRepresentation> handleObjectValidationException(ObjectValidationException e) {
+        log.error(e.getMessage(), e);
+        ExceptionRepresentation representation = ExceptionRepresentation.builder()
+                .errorMessage("Object not valid exception has occurred")
+                .errorSrc(e.getViolatedObject())
+                .errorValidation(e.getViolations())
+                .build();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(representation);
+    }
+
+    @ExceptionHandler(ObjectValidationException.class)
+    public ResponseEntity<ExceptionRepresentation> handleObjectValidationException(OperationNonPermittedException e) {
+        log.error(e.getMessage(), e);
+        ExceptionRepresentation representation = ExceptionRepresentation.builder()
+                .errorMessage("Object not valid exception has occurred")
+                .build();
+        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(representation);
+    }
+
 
 
 }
