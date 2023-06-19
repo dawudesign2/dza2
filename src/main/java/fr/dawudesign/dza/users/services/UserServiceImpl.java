@@ -1,11 +1,12 @@
 package fr.dawudesign.dza.users.services;
 
+import fr.dawudesign.dza.exeptions.ParametrizeMessageException;
 import fr.dawudesign.dza.users.dtos.UserDTO;
 import fr.dawudesign.dza.users.entities.User;
 import fr.dawudesign.dza.users.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.stream.Collectors;
 
@@ -25,7 +26,12 @@ public class UserServiceImpl implements UserService {
     public UserDTO findById(Long id) {
         return repository.findById(id)
                 .map(UserDTO::fromEntity)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ParametrizeMessageException(
+                        HttpStatus.NOT_FOUND,
+                        "user.entity.not.found",
+                        "user with id %s not found",
+                        id
+                ));
     }
 
     @Override
@@ -40,7 +46,12 @@ public class UserServiceImpl implements UserService {
             User user = UserDTO.toEntity(userDTO);
             return UserDTO.fromEntity(repository.save(user));
         } else {
-            throw new RuntimeException("User not found");
+            throw new ParametrizeMessageException(
+                    HttpStatus.NOT_FOUND,
+                    "user.entity.not.found",
+                    "User with id %s not found",
+                    id
+            );
         }
     }
 
@@ -49,7 +60,12 @@ public class UserServiceImpl implements UserService {
         if(repository.existsById(id)){
             repository.deleteById(id);
         } else {
-            throw new RuntimeException("User not found");
+            throw new ParametrizeMessageException(
+                    HttpStatus.NOT_FOUND,
+                    "user.entity.not.found",
+                    "User with id %s not found",
+                    id
+            );
         }
     }
 }

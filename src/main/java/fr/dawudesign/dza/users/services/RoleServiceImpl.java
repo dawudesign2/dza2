@@ -1,8 +1,10 @@
 package fr.dawudesign.dza.users.services;
 
+import fr.dawudesign.dza.exeptions.ParametrizeMessageException;
 import fr.dawudesign.dza.users.entities.Role;
 import fr.dawudesign.dza.users.repositories.RoleRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -19,7 +21,12 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Role findById(Long id) {
         Optional<Role> role = repository.findById(id);
-        return role.orElseThrow(() -> new RuntimeException("Role not found"));
+        return role.orElseThrow(() -> new ParametrizeMessageException(
+                HttpStatus.NOT_FOUND,
+                "Role.entity.not.found",
+                "Profile with id %s not found",
+                id
+        ));
     }
 
     @Override
@@ -35,7 +42,12 @@ public class RoleServiceImpl implements RoleService {
             roleFromDb.setName(role.getName());
             return repository.save(roleFromDb);
         } else {
-            throw new RuntimeException("Role not found");
+            throw new ParametrizeMessageException(
+                    HttpStatus.NOT_FOUND,
+                    "Role.entity.not.found",
+                    "Profile with id %s not found",
+                    id
+            );
         }
     }
 
@@ -45,7 +57,12 @@ public class RoleServiceImpl implements RoleService {
         if (role.isPresent()) {
             repository.deleteById(id);
         } else {
-            throw new RuntimeException("Role not found");
+            throw new ParametrizeMessageException(
+                    HttpStatus.NOT_FOUND,
+                    "Role.entity.not.found",
+                    "Profile with id %s not found",
+                    id
+            );
         }
     }
 }

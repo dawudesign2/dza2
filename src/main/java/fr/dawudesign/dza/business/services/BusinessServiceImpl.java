@@ -3,7 +3,9 @@ package fr.dawudesign.dza.business.services;
 import fr.dawudesign.dza.business.dtos.BusinessDTO;
 import fr.dawudesign.dza.business.entities.Business;
 import fr.dawudesign.dza.business.repositories.BusinessRepository;
+import fr.dawudesign.dza.exeptions.ParametrizeMessageException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.stream.Collectors;
@@ -25,7 +27,12 @@ public class BusinessServiceImpl implements BusinessService {
     public BusinessDTO findById(Long id) {
         return repository.findById(id)
                 .map(BusinessDTO::fromEntity)
-                .orElseThrow(() -> new RuntimeException("Business not found"));
+                .orElseThrow(() -> new ParametrizeMessageException(
+                        HttpStatus.NOT_FOUND,
+                        "business.entity.not.found",
+                        "Business with id %s not found",
+                        id
+                ));
     }
 
     @Override
@@ -41,7 +48,12 @@ public class BusinessServiceImpl implements BusinessService {
             Business business = BusinessDTO.toEntity(businessDTO);
             return BusinessDTO.fromEntity(repository.save(business));
         } else {
-            throw new RuntimeException("Business not found");
+            throw new ParametrizeMessageException(
+                    HttpStatus.NOT_FOUND,
+                    "business.entity.not.found",
+                    "Business with id %s not found",
+                    id
+            );
         }
     }
 
@@ -50,7 +62,12 @@ public class BusinessServiceImpl implements BusinessService {
         if(repository.existsById(id)){
             repository.deleteById(id);
         } else {
-            throw new RuntimeException("Business not found");
+            throw new ParametrizeMessageException(
+                    HttpStatus.NOT_FOUND,
+                    "business.entity.not.found",
+                    "Business with id %s not found",
+                    id
+            );
         }
     }
 }

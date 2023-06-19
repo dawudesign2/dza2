@@ -1,9 +1,11 @@
 package fr.dawudesign.dza.users.services;
 
+import fr.dawudesign.dza.exeptions.ParametrizeMessageException;
 import fr.dawudesign.dza.users.dtos.ProfileDTO;
 import fr.dawudesign.dza.users.entities.Profile;
 import fr.dawudesign.dza.users.repositories.ProfileRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.stream.Collectors;
@@ -25,7 +27,12 @@ public class ProfileServiceImpl implements ProfileService{
     public ProfileDTO findById(Long id) {
         return repository.findById(id)
                 .map(ProfileDTO::fromEntity)
-                .orElseThrow(() -> new RuntimeException("Profile not found"));
+                .orElseThrow(() -> new ParametrizeMessageException(
+                        HttpStatus.NOT_FOUND,
+                        "Profile.entity.not.found",
+                        "Profile with id %s not found",
+                        id
+                ));
     }
 
     @Override
@@ -40,7 +47,12 @@ public class ProfileServiceImpl implements ProfileService{
             Profile profile = ProfileDTO.toEntity(profileDTO);
             return ProfileDTO.fromEntity(repository.save(profile));
         } else {
-            throw new RuntimeException("Profile not found");
+            throw new ParametrizeMessageException(
+                    HttpStatus.NOT_FOUND,
+                    "Profile.entity.not.found",
+                    "Profile with id %s not found",
+                    id
+            );
         }
     }
 
@@ -49,7 +61,12 @@ public class ProfileServiceImpl implements ProfileService{
         if(repository.existsById(id)){
             repository.deleteById(id);
         } else {
-            throw new RuntimeException("Profile not found");
+            throw new ParametrizeMessageException(
+                    HttpStatus.NOT_FOUND,
+                    "Profile.entity.not.found",
+                    "Profile with id %s not found",
+                    id
+            );
         }
     }
 }
