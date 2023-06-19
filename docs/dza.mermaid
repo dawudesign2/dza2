@@ -37,6 +37,7 @@ erDiagram
     }
 
     Business }|--|{ User : has
+    Business }|--|{ Benefit : has
     Business {
         int id
         string name
@@ -50,6 +51,22 @@ erDiagram
         string website
         string logo
         string siret
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    Benefit ||--|| Category : has
+    Benefit {
+        int id
+        string name
+        string image
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    Category {
+        int id
+        string name
         timestamp created_at
         timestamp updated_at
     }

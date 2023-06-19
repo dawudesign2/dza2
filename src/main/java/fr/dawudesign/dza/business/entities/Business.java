@@ -35,4 +35,7 @@ public class Business extends AbstractEntity {
 
     @OneToMany(mappedBy = "business")
     private Set<User> user;
+
+    @OneToMany(mappedBy = "business")
+    private Set<Benefit> benefits;
 }

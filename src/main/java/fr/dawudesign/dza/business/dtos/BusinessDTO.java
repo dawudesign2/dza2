@@ -31,7 +31,6 @@ public class BusinessDTO {
     public static BusinessDTO fromEntity(Business business) {
         return BusinessDTO.builder()
                 .id(business.getId())
-
                 .name(business.getName())
                 .description(business.getDescription())
                 .address(business.getAddress())

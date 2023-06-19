@@ -1,0 +1,9 @@
+package fr.dawudesign.dza.business.repositories;
+
+import fr.dawudesign.dza.business.entities.Category;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface CategoryRepository extends JpaRepository<Category, Long> {
+}
