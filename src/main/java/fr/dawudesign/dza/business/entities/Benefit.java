@@ -19,6 +19,9 @@ public class Benefit  extends AbstractEntity {
 
     private String name;
     private String image;
+    private String description;
+    private Double price;
+    private Integer duration;
 
     @OneToOne
     @JoinColumn(name = "category_id")

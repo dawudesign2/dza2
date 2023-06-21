@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/categories")
-@Tag(name = "Categories")
+@Tag(name = "Category")
 public class CategoryController implements AbstractController<CategoryDTO> {
     private final CategoryService service;
     @Override

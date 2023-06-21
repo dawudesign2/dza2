@@ -18,6 +18,10 @@ public class BenefitDTO {
     @NotBlank
     private String name;
     private String image;
+    private String description;
+    private Double price;
+    @Positive
+    private Integer duration;
     private Long businessId;
     private Long categoryId;
 
@@ -27,6 +31,9 @@ public class BenefitDTO {
                 .id(benefit.getId())
                 .name(benefit.getName())
                 .image(benefit.getImage())
+                .description(benefit.getDescription())
+                .price(benefit.getPrice())
+                .duration(benefit.getDuration())
                 .businessId(benefit.getBusiness() != null ? benefit.getBusiness().getId() : null)
                 .categoryId(benefit.getCategory() != null ? benefit.getCategory().getId() : null)
                 .build();
@@ -37,6 +44,9 @@ public class BenefitDTO {
                 .id(benefitDTO.getId())
                 .name(benefitDTO.getName())
                 .image(benefitDTO.getImage())
+                .description(benefitDTO.getDescription())
+                .price(benefitDTO.getPrice())
+                .duration(benefitDTO.getDuration())
                 .build();
     }
 }

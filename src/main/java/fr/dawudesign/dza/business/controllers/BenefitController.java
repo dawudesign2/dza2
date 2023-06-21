@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/benefits")
-@Tag(name = "Benefits")
+@Tag(name = "Benefit")
 public class BenefitController implements AbstractController<BenefitDTO> {
 
     private final BenefitService service;

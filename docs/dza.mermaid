@@ -60,6 +60,9 @@ erDiagram
         int id
         string name
         string image
+        String description
+        Double price
+        int duration
         timestamp created_at
         timestamp updated_at
     }
@@ -67,6 +70,36 @@ erDiagram
     Category {
         int id
         string name
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    Appointment ||--|| User : has
+    Appointment {
+        int id
+        Date start_dDate
+        Date end_Date
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    TimeSlot ||--|| Appointment : has
+    TimeSlot {
+        int id
+        String start_Time
+        String end_Date
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    Booking ||--|| Appointment : has
+    Booking ||--|| User : has
+    Booking ||--|| Benefit : has
+    Booking {
+        int id
+        int CustomerId
+        int collaboratorId
+        Boolean status
         timestamp created_at
         timestamp updated_at
     }
