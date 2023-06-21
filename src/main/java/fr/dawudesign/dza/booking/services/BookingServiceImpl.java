@@ -55,7 +55,21 @@ public class BookingServiceImpl implements BookingService {
                     id
             );
         }
+    }
 
+    public BookingDTO patch (Long id, BookingDTO bookingDTO) {
+        if (repository.existsById(id)) {
+            Booking booking = BookingDTO.toEntity(bookingDTO);
+            booking.setIsConfirmed(bookingDTO.getIsConfirmed());
+            return BookingDTO.fromEntity(repository.save(booking));
+        } else {
+            throw new ParametrizeMessageException(
+                    HttpStatus.NOT_FOUND,
+                    "booking.entity.not_found",
+                    "Booking with id %s not found",
+                    id
+            );
+        }
     }
 
     @Override

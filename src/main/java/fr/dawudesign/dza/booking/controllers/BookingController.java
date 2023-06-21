@@ -6,6 +6,7 @@ import fr.dawudesign.dza.utils.AbstractController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,6 +35,11 @@ public class BookingController implements AbstractController<BookingDTO> {
     @Override
     public ResponseEntity<BookingDTO> updateById(Long id, BookingDTO bookingDTO) {
         return ResponseEntity.ok(service.update(id, bookingDTO));
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<BookingDTO> patchById(Long id, BookingDTO bookingDTO) {
+        return ResponseEntity.ok(service.patch(id, bookingDTO));
     }
 
     @Override
