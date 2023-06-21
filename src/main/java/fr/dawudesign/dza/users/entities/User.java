@@ -1,6 +1,7 @@
 package fr.dawudesign.dza.users.entities;
 
 import fr.dawudesign.dza.booking.entities.Appointment;
+import fr.dawudesign.dza.booking.entities.Booking;
 import fr.dawudesign.dza.business.entities.Business;
 import fr.dawudesign.dza.utils.AbstractEntity;
 import jakarta.persistence.*;
@@ -37,6 +38,9 @@ public class User extends AbstractEntity implements UserDetails {
 
     @OneToOne
     private Appointment appointment;
+
+    @OneToOne
+    private Booking booking;
 
     @ManyToOne
     @JoinColumn(name = "business_id")

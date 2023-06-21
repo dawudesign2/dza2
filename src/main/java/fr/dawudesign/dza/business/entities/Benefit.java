@@ -1,5 +1,6 @@
 package fr.dawudesign.dza.business.entities;
 
+import fr.dawudesign.dza.booking.entities.Booking;
 import fr.dawudesign.dza.utils.AbstractEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -22,6 +23,9 @@ public class Benefit  extends AbstractEntity {
     private String description;
     private Double price;
     private Integer duration;
+
+    @OneToOne
+    private Booking booking;
 
     @OneToOne
     @JoinColumn(name = "category_id")
